@@ -7,7 +7,8 @@ $b = $b -replace "-", " maxQ:"
 $b = $b -replace "([\s][\w])[\s]", ' character:$1" '
 $b = $b -replace ": ", ':"'
 $b = $b -replace " ", ', '
-$b[0] = $b[0] -replace "^", "let listOfPasswords = ["
-$b[$b.Count - 1] = $b[$b.Count - 1] -replace ",$", "];"
-$b > inputProcessed.js
+$b[0] = $b[0] -replace "^", "var listOfPasswords = ["
+$b[$b.Count - 1] = $b[$b.Count - 1] -replace ",$", "];
+try{module.exports = listOfPasswords;} catch(e){}"
+$b > input.js
 
