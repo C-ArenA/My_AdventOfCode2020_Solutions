@@ -1,24 +1,28 @@
-let expenseReport = [1630, 1801, 1917, 1958, 1953, 1521, 1990, 1959, 1543, 1798, 638, 1499, 1977, 1433, 1532, 1780, 1559, 1866, 1962, 1999, 1623, 1772, 1730, 1670, 1791, 1947, 1961, 1523, 959, 1998, 1693, 1490, 1712, 910, 1635, 1837, 586, 1590, 1741, 1739, 1660, 1883, 1777, 1734, 1413, 1456, 1511, 1957, 1738, 1685, 1677, 1419, 1566, 1639, 1578, 1922, 1856, 1946, 1965, 1649, 1854, 1610, 1806, 1424, 1616, 218, 1678, 1992, 1985, 903, 1626, 1412, 1964, 671, 1692, 1571, 1690, 1587, 1933, 1367, 1585, 1575, 498, 1601, 2005, 1711, 1948, 1991, 1580, 1704, 207, 1560, 1867, 1600, 1594, 1930, 1541, 1832, 1613, 1599, 1757, 71, 1534, 1940, 1982, 1960, 1530, 1908, 1857, 1410, 1987, 1526, 1546, 2002, 1923, 1972, 1752, 1984, 1754, 1916, 1942, 1980, 1608, 1398, 1438, 1955, 1968, 1799, 1976, 1847, 1775, 1904, 1983, 1945, 1554, 1486, 1527, 1884, 1553, 1736, 1561, 1513, 1695, 1431, 1997, 1405, 1872, 1434, 1679, 1609, 105, 1582, 1795, 1826, 1886, 1472, 2007, 1617, 1978, 1669, 1764, 1865, 1773, 1993, 1666, 1583, 2009, 1969, 2001, 1659, 1833, 1713, 1893, 2000, 1520, 1652, 1437, 1556, 1633, 1386, 1819, 1973, 1426, 1975, 2010, 1863, 1593, 1996, 1796, 1986, 1995, 657, 1784, 1644, 1941, 1596, 1849, 1065, 1927, 1525];
-
-console.log(expenseReport.length);
-console.log(expenseReport.length * (expenseReport.length - 1));
-
-let suma = 0;
-for (let i = 0; i < expenseReport.length; i++) {
-    const elementoBase = expenseReport[i];
-    for (let j = 0; j < expenseReport.length; j++) {
-        const elementoSuma = expenseReport[j];
-        for (let k = 0; k < expenseReport.length; k++) {
-            const elementoSuma2 = expenseReport[k];
-            suma = elementoBase + elementoSuma + elementoSuma2;
-            if (suma == 2020 && (i != j != k)) {
-                console.log(elementoBase);
-                console.log(elementoSuma);
-                console.log(elementoSuma2);
-                console.log(elementoBase * elementoSuma * elementoSuma2);
-                break; 
+try { 
+    var expenseReport = require('./input.js');
+} catch(error){
+    console.error("Dado que no estamos en un entorno de Node.js, de todas formas obtendrás el input del anterior script mediante el index.html");
+}
+function day1Part2Solver() {
+    let threeSum = 0;
+    let threeSumMultipliedResult = 0;
+    for (let i = 0; i < expenseReport.length; i++) {
+        const elementoBase = expenseReport[i];
+        for (let j = 0; j < expenseReport.length; j++) {
+            const elementoSuma = expenseReport[j];
+            for (let k = 0; k < expenseReport.length; k++) {
+                const elementoSuma2 = expenseReport[k];
+                threeSum = elementoBase + elementoSuma + elementoSuma2;
+                if (threeSum == 2020 && (i != j != k)) {
+                    threeSumMultipliedResult = elementoBase * elementoSuma * elementoSuma2;
+                    // Para salir del loop habían varias formas como usar labels, pero usaré la siguiente:
+                    i = j = expenseReport.length
+                    break; 
+                }
             }
         }
     }
+    return threeSumMultipliedResult;
 }
 
+console.log(day1Part2Solver());
