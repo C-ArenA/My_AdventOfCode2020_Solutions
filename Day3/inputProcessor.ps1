@@ -5,11 +5,7 @@ $b = $b -replace "#", "'#', "
 $b = $b -replace "\.", "'.', "
 $b = $b -replace ", ],$", "],"
 # $b = "let mapOfTrees = [" + $b
-$b > inputProc1.txt
-$c = Get-Content .\inputProc1.txt -RAW
-$d = $c -replace ",\r\n$", "];"
-$d = $d -replace "^", "let mapOfTrees = ["
-$d
-$d > inputYeah.js
-#$d = $d -replace ",$", "];"
+$b[0] = $b[0] -replace "^", "let mapOfTrees = ["
+$b[$b.Count - 1] = $b[$b.Count - 1] -replace ",$", "];"
+$b > inputProcessed.js
 
