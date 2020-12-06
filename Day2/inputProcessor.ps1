@@ -8,7 +8,6 @@ $b = $b -replace "([\s][\w])[\s]", ' character:$1" '
 $b = $b -replace ": ", ':"'
 $b = $b -replace " ", ', '
 $b[0] = $b[0] -replace "^", "var listOfPasswords = ["
-$b[$b.Count - 1] = $b[$b.Count - 1] -replace ",$", "];
-try{module.exports = listOfPasswords;} catch(e){}"
+$b[$b.Count - 1] = $b[$b.Count - 1] -replace ",$", "];`r`ntry{module.exports = listOfPasswords;} catch(e){}"
 $b > input.js
 
