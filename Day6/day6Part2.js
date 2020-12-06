@@ -1,5 +1,5 @@
 try{ 
-    var customDeclarationFormAnswersByGroup = require('./input2.js');
+    var customDeclarationFormAnswersByGroup = require('./input.js');
 } catch(error){}
 
 function day6_CustomCustoms_Part2() {

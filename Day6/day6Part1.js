@@ -34,11 +34,14 @@ function day6_CustomCustoms_Part1() {
     function groupYesCounter(groupAnswers) {
         let yesAnsweredQuestions = {};
         for (let index = 0; index < groupAnswers.length; index++) {
-            const answer = groupAnswers[index];
-            if (yesAnsweredQuestions[answer] == undefined) {
-                questions[answer] += 1; 
+            const answersByPerson = groupAnswers[index];
+            for (let jindex = 0; jindex < answersByPerson.length; jindex++) {
+                const answer = answersByPerson[jindex];
+                if (yesAnsweredQuestions[answer] == undefined) {
+                    questions[answer] += 1; 
+                }
+                yesAnsweredQuestions[answer] = true;
             }
-            yesAnsweredQuestions[answer] = true;
         }
         return Object.keys(yesAnsweredQuestions).length;
     }
