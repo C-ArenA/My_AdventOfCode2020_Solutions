@@ -3,7 +3,6 @@ body {
   color: #cccccc;
   font-family: "Source Code Pro", monospace;
   font-size: 14pt;
-  min-width: 60em;
 }
 img { border:0; }
 a { outline:0; }
@@ -163,8 +162,8 @@ input[type="submit"]:hover, input[type="submit"]:focus {
 
 article {
   width: fit-content;
-  margin-bottom: 2em;
-  margin-top: 2em;
+  margin-left: auto;
+  margin-right: auto;
 }
 article h2 {
   color: #ffffff;
@@ -217,14 +216,52 @@ form#settings input[type="checkbox"] ~ span {
   min-width: 30em;
 }
 
-
+h3{
+  display: inline-block;
+  margin: 0px auto;
+}
 
 section {
   border-style: solid;
   padding: 15px;
+  margin: 5px 0px;
   width: fit-content;
   display: inline-block;
   height: 350px;
+  max-height: 400px;
+  min-width: 300px;
   max-width: 45vw;
   overflow: auto;
+  text-align: center;
+}
+iframe {
+  width: 280px;
+  padding: auto;
+  margin: 8px auto;
+  display: block;
+}
+@media (max-width: 730px) {
+  section {
+    display: block;
+    width: 80%;
+    max-width: unset;
+    margin: 25px auto;
+    height: fit-content;
+  }
+  header h1 {
+    display: block;
+  }
+
+  header .user {
+    display: block;
+    padding-left: 0;
+  }
+  header h1.title-event{
+    margin-left: -85px;
+  }
+
+  h3{
+    display: inline-block;
+    margin: 0px auto;
+  }
 }
