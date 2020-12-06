@@ -18,7 +18,7 @@ Es probable que algunas de las carpetas tenga archivos extra si es que en el fut
 
 Afuera de todo eso está el index.html que llama a todas las soluciones para resumirlas en una sola página que, por cierto, ya está subida a GitHub Pages:
 
-[Mis soluciones con sus respectivos videos](https://c-arena.github.io/My_AdventOfCode2020_Solutions/ "Mis soluciones con sus respectivos videos")
+[Mis Soluciones y mis videos](https://c-arena.github.io/My_AdventOfCode2020_Solutions/index.html)
 
 Debo aclarar que no tengo ninguna habilidad superior para resolver estos ejercicios así que en muchos casos verán las soluciones menos eficientes (Espero que esto sea lo menos posible). 
 
