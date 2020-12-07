@@ -16,5 +16,5 @@ $b = $b -replace ", $", "]"
 $b = $b -replace "^", "var customDeclarationFormAnswersByGroup = ["
 $b = $b -replace "$", "];"
 $b = $b -replace "$", "`r`ntry{module.exports = customDeclarationFormAnswersByGroup;} catch(e){}"
-$b | out-file input.js -encoding utf8 #>
+$b | out-file input.js -encoding utf8 
 Remove-Item .\tempInput.txt
