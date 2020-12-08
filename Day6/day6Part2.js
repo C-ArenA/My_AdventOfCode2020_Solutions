@@ -19,7 +19,6 @@ function day6_CustomCustoms_Part2() {
                 }
             }
         }
-        console.log(yesAnsweredQuestions);
         return commonSum;
     }
 
