@@ -281,51 +281,56 @@ let objectsArray = [{ecl:"grn", cid:"315", iyr:"2012", hgt:"192cm", eyr:"2023", 
 {hcl:"#c0946f", ecl:"brn", iyr:"2017", eyr:"2028", pid:"161390075", byr:"1993", cid:"50", hgt:"171cm"},
 {ecl:"#ae12d3", hgt:"74cm", cid:"239", hcl:"z", pid:"345439730", iyr:"1924", byr:"2029", eyr:"2031"}];
 
-let validCounter = 0;
-let validObjects = [];
-for (let m = 0; m < objectsArray.length; m++) {
-    const thisPassport = objectsArray[m];
-    if (Object.keys(thisPassport).length == 8) {
-        validCounter += 1;
-        validObjects.push(thisPassport);
-    } else if (Object.keys(thisPassport).length == 7) {
-        validCounter += 1;
-        validObjects.push(thisPassport);
-        for (let n = 0; n < Object.keys(thisPassport).length; n++) {
-            const property = Object.keys(thisPassport)[n];
-            if (property == "cid") {
-                validCounter -= 1;
-                validObjects.pop(thisPassport);
+function day4_PassportProcessing_Part1_ThirdSolution() {
+    let validCounter = 0;
+    let validObjects = [];
+    for (let m = 0; m < objectsArray.length; m++) {
+        const thisPassport = objectsArray[m];
+        if (Object.keys(thisPassport).length == 8) {
+            validCounter += 1;
+            validObjects.push(thisPassport);
+        } else if (Object.keys(thisPassport).length == 7) {
+            validCounter += 1;
+            validObjects.push(thisPassport);
+            for (let n = 0; n < Object.keys(thisPassport).length; n++) {
+                const property = Object.keys(thisPassport)[n];
+                if (property == "cid") {
+                    validCounter -= 1;
+                    validObjects.pop(thisPassport);
+                }
             }
-        }
-    } 
-}
-
-console.log(validCounter);
-
-let realValidCounter = 0;
-for (let i = 0; i < validObjects.length; i++) {
-    const thisValidPassport = validObjects[i];
-    //byr
-    let byrv = yearValidator(thisValidPassport.byr, 4, 1920, 2002);
-    //iyr
-    let iyrv = yearValidator(thisValidPassport.iyr, 4, 2010, 2020);
-    //eyr
-    let eyrv = yearValidator(thisValidPassport.eyr, 4, 2020, 2030);
-    //hgt
-    let hgtv = heightValidator(thisValidPassport.hgt);
-    //hcl
-    let hclv = hairColorValidator(thisValidPassport.hcl);
-    //ecl
-    let eclv = eyeColorValidator(thisValidPassport.ecl);
-    //pid
-    let pidv = idValidator(thisValidPassport.pid, 9);
-
-    if (byrv && iyrv && eyrv && hgtv && hclv && eclv && pidv) {
-        realValidCounter += 1;
+        } 
     }
+    return validObjects;
 }
-console.log(realValidCounter);
+//console.log(day4_PassportProcessing_Part2);
+function day4_PassportProcessing_Part2(validObjects) {
+    let realValidCounter = 0;
+    for (let i = 0; i < validObjects.length; i++) {
+        const thisValidPassport = validObjects[i];
+        //byr
+        let byrv = yearValidator(thisValidPassport.byr, 4, 1920, 2002);
+        //iyr
+        let iyrv = yearValidator(thisValidPassport.iyr, 4, 2010, 2020);
+        //eyr
+        let eyrv = yearValidator(thisValidPassport.eyr, 4, 2020, 2030);
+        //hgt
+        let hgtv = heightValidator(thisValidPassport.hgt);
+        //hcl
+        let hclv = hairColorValidator(thisValidPassport.hcl);
+        //ecl
+        let eclv = eyeColorValidator(thisValidPassport.ecl);
+        //pid
+        let pidv = idValidator(thisValidPassport.pid, 9);
+
+        if (byrv && iyrv && eyrv && hgtv && hclv && eclv && pidv) {
+            realValidCounter += 1;
+        }
+    }
+    return realValidCounter;
+}
+
+//console.log(day4_PassportProcessing_Part2(day4_PassportProcessing_Part1_ThirdSolution()));
 function yearValidator(year, nDigits, minValid, maxValid) {
     if (year.length == nDigits) {
         if (parseInt(year) >= minValid && parseInt(year) <= maxValid ) {

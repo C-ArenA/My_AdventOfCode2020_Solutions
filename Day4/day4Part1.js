@@ -281,50 +281,54 @@ let propertiesArrays = [["ecl", "cid", "iyr", "hgt", "eyr", "pid", "byr", "hcl"]
 ["hcl", "ecl", "iyr", "eyr", "pid", "byr", "cid", "hgt"],
 ["ecl", "hgt", "cid", "hcl", "pid", "iyr", "byr", "eyr"]];
 
-var pesos = new Object();
-pesos["byr"] = 1;
-pesos["iyr"] = 1;
-pesos["eyr"] = 1;
-pesos["hgt"] = 1;
-pesos["hcl"] = 1;
-pesos["ecl"] = 1;
-pesos["pid"] = 1;
-pesos["cid"] = 2;
+function day4_PassportProcessing_Part1FirstSolution() {
+    var pesos = new Object();
+    pesos["byr"] = 1;
+    pesos["iyr"] = 1;
+    pesos["eyr"] = 1;
+    pesos["hgt"] = 1;
+    pesos["hcl"] = 1;
+    pesos["ecl"] = 1;
+    pesos["pid"] = 1;
+    pesos["cid"] = 2;
 
-let validCounter = 0;
-let invalidIndexes = []
-for (let i = 0; i < propertiesArrays.length; i++) {
-    const propArray = propertiesArrays[i];
-    let pesoActual = 0;
-    if (propArray.length >= 7) {
-        for (let j = 0; j < propArray.length; j++) {
-            const property = propArray[j];
-            pesoActual += pesos[property];
+    let validCounter = 0;
+    for (let i = 0; i < propertiesArrays.length; i++) {
+        const propArray = propertiesArrays[i];
+        let pesoActual = 0;
+        if (propArray.length >= 7) {
+            for (let j = 0; j < propArray.length; j++) {
+                const property = propArray[j];
+                pesoActual += pesos[property];
+            }
+            if (pesoActual == 9 || pesoActual == 7) {
+                validCounter += 1;
+            } 
         }
-        if (pesoActual == 9 || pesoActual == 7) {
+        
+
+    }
+}
+
+//console.log(validCounter);
+
+function day4_PassportProcessing_Part1() {
+    let validCounter = 0;
+    for (let m = 0; m < propertiesArrays.length; m++) {
+        const propArray = propertiesArrays[m];
+        if (propArray.length == 8) {
             validCounter += 1;
+        } else if (propArray.length == 7) {
+            validCounter += 1;
+            for (let n = 0; n < propArray.length; n++) {
+                const property = propArray[n];
+                if (property == "cid") {
+                    validCounter -= 1;
+                }
+            }
         } 
     }
-    
 
+    return validCounter;
 }
-console.log(validCounter);
-
-let validCounter2 = 0;
-let invalidIndexes2 = [];
-for (let m = 0; m < propertiesArrays.length; m++) {
-    const propArray = propertiesArrays[m];
-    if (propArray.length == 8) {
-        validCounter2 += 1;
-    } else if (propArray.length == 7) {
-        validCounter2 += 1;
-        for (let n = 0; n < propArray.length; n++) {
-            const property = propArray[n];
-            if (property == "cid") {
-                validCounter2 -= 1;
-            }
-        }
-    } 
-}
-
-console.log(validCounter2);
+//console.log(day4_PassportProcessing_Part1());
