@@ -1,3 +1,4 @@
+# Con este script de PowerShell puedo crear mi carpeta y archivos para cada día de forma automática :P
 $dayNumber = Read-Host -Prompt 'Input the number of the day'
 $dayName = Read-Host -Prompt 'Input the NAME of the day without Spaces'
 Write-Host "Perfect! I'll create all you need for Day $dayNumber : $dayName. Hope you enjoy it!"
