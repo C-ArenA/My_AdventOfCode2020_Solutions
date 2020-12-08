@@ -1,4 +1,4 @@
-let boardingPasses = [{rowId:"BFFFBFF", colId:"RLR"},
+var boardingPasses = [{rowId:"BFFFBFF", colId:"RLR"},
 {rowId:"FBBBFFB", colId:"RRL"},
 {rowId:"FFBFBFF", colId:"RRR"},
 {rowId:"FBBFBFF", colId:"RRR"},
@@ -894,33 +894,34 @@ function decoder(positionId, i, n) {
         return decoder(positionId.slice(1, positionId.length + 1), i, (n+i-1)/2);
     }
 }
+function day5_BinaryBoarding_Part2() {    
+    const maxPossibleSeatId = 127 * 8 + 7;
+    const minPossibleSeatId = 0 *8 + 0;
+    let seatsArray = Array(maxPossibleSeatId+1).fill(0);
+    let mySeat = Object();
+    for (let m = 0; m < boardingPasses.length; m++) {
+        const boardingPass = boardingPasses[m];
+        const thisRow = decoder(boardingPass.rowId, 0, 127);
+        const thisCol = decoder(boardingPass.colId, 0, 7);
+        const thisSeatId = thisRow * 8 + thisCol;
+        seatsArray[thisSeatId] += 3;
+        if (seatsArray[thisSeatId] == 5) {
+            delete mySeat[thisSeatId];
+        }
 
-const maxPossibleSeatId = 127 * 8 + 7;
-const minPossibleSeatId = 0 *8 + 0;
-let seatsArray = Array(maxPossibleSeatId+1).fill(0);
-let mySeat = Object();
-for (let m = 0; m < boardingPasses.length; m++) {
-    const boardingPass = boardingPasses[m];
-    const thisRow = decoder(boardingPass.rowId, 0, 127);
-    const thisCol = decoder(boardingPass.colId, 0, 7);
-    const thisSeatId = thisRow * 8 + thisCol;
-    seatsArray[thisSeatId] += 3;
-    if (seatsArray[thisSeatId] == 5) {
-        delete mySeat[thisSeatId];
-    }
-
-    if (thisSeatId != maxPossibleSeatId) {
-        seatsArray[thisSeatId+1] += 1;   
-        if (seatsArray[thisSeatId+1] == 2) {
-            mySeat[thisSeatId+1] = true;
+        if (thisSeatId != maxPossibleSeatId) {
+            seatsArray[thisSeatId+1] += 1;   
+            if (seatsArray[thisSeatId+1] == 2) {
+                mySeat[thisSeatId+1] = true;
+            }
+        }
+        if (thisSeatId != minPossibleSeatId) {
+            seatsArray[thisSeatId-1] += 1;   
+            if (seatsArray[thisSeatId-1] == 2) {
+                mySeat[thisSeatId-1] = true;
+            }
         }
     }
-    if (thisSeatId != minPossibleSeatId) {
-        seatsArray[thisSeatId-1] += 1;   
-        if (seatsArray[thisSeatId-1] == 2) {
-            mySeat[thisSeatId-1] = true;
-        }
-    }
+    return Object.keys(mySeat)[0];
 }
-
-console.log(mySeat);
+//console.log(day5_BinaryBoarding_Part2());

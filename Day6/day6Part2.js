@@ -30,4 +30,4 @@ function day6_CustomCustoms_Part2() {
     return totalCommonYes;
 }
 
-console.log(day6_CustomCustoms_Part2());
+//console.log(day6_CustomCustoms_Part2());

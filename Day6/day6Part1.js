@@ -51,9 +51,8 @@ function day6_CustomCustoms_Part1() {
         const groupAnswers = customDeclarationFormAnswersByGroup[index];
         totalYes += groupYesCounter(groupAnswers);        
     }
-    console.log(questions);
     return totalYes;
 }
 
 
-console.log(day6_CustomCustoms_Part1());
+//console.log(day6_CustomCustoms_Part1());

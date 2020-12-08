@@ -1,4 +1,4 @@
-let boardingPasses = [{rowId:"BFFFBFF", colId:"RLR"},
+var boardingPasses = [{rowId:"BFFFBFF", colId:"RLR"},
 {rowId:"FBBBFFB", colId:"RRL"},
 {rowId:"FFBFBFF", colId:"RRR"},
 {rowId:"FBBFBFF", colId:"RRR"},
@@ -895,16 +895,18 @@ function decoder(positionId, i, n) {
     }
 }
 
-let biggerId = 0;
-for (let m = 0; m < boardingPasses.length; m++) {
-    const boardingPass = boardingPasses[m];
-    const thisRow = decoder(boardingPass.rowId, 0, 127);
-    const thisCol = decoder(boardingPass.colId, 0, 7);
-    const thisSeatId = thisRow * 8 + thisCol;
-    
-    if (biggerId < thisSeatId) {
-        biggerId = thisSeatId;
+function day5_BinaryBoarding_Part1() {
+    let biggerId = 0;
+    for (let m = 0; m < boardingPasses.length; m++) {
+        const boardingPass = boardingPasses[m];
+        const thisRow = decoder(boardingPass.rowId, 0, 127);
+        const thisCol = decoder(boardingPass.colId, 0, 7);
+        const thisSeatId = thisRow * 8 + thisCol;
+        
+        if (biggerId < thisSeatId) {
+            biggerId = thisSeatId;
+        }
     }
+    return biggerId;    
 }
-
-console.log(biggerId);
+//console.log(day5_BinaryBoarding_Part1());

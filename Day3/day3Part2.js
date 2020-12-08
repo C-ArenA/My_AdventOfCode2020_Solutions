@@ -23,5 +23,5 @@ function day3_TobogganTrajectory_Part2() {
             day3_TobogganTrajectory_Part1(1,2);
 }
 console.clear();
-console.log(day3_TobogganTrajectory_Part2());
+//console.log(day3_TobogganTrajectory_Part2());
 
