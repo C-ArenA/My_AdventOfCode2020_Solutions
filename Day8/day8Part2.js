@@ -15,9 +15,10 @@ function day8_findJmpNopInstructionNumbers(anyExecutionStory, anyBootCode) {
     return jmpNopArray;
 }
 
+// ------------------ MAIN FUNCTION ----------------
 function day8_HandheldHalting_Part2(){
     // Variable que almacena los resultados de cada ejecución
-    let lastExecutionResults = day8_executeBootCode(bootCode)
+    let lastExecutionResults = day8_executeBootCode(bootCode);
     // Obtengo Historia de ejecución ORIGINAL
     const originalStory = lastExecutionResults.myExecutionStory;
     // Obtengo lista de JMPs y NOPs donde el index 0 es el último en haberse ejecutado 

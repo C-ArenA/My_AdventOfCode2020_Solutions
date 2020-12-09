@@ -31,7 +31,7 @@ function day8_executeBootCode(anyBootCode){
     do {
         day8_executeInstruction(myBootCodeExecution);
         // Error aquí 
-        if (myBootCodeExecution.myCurrenInstructionNumber >= myBootCodeExecution.myBootCode.length) {
+        if (myBootCodeExecution.myCurrentInstructionNumber >= myBootCodeExecution.myBootCode.length) {
             myBootCodeExecution.myResults.doIFinish = true;
             return myBootCodeExecution.myResults;
         }
@@ -44,7 +44,7 @@ function day8_HandheldHalting_Part1(){
     return day8_executeBootCode(bootCode).myAccumulator;
 }
 // ---------------- Ejecuto la función ------------------
-// console.log(day8_HandheldHalting_Part1());
+console.log(day8_HandheldHalting_Part1());
 
 try{
     module.exports = {day8_executeInstruction, day8_executeBootCode};
