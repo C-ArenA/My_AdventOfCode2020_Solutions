@@ -230,7 +230,7 @@ section {
   height: 350px;
   max-height: 400px;
   min-width: 300px;
-  max-width: 45vw;
+  max-width: 300px;
   overflow: auto;
   text-align: center;
 }
@@ -292,4 +292,8 @@ padding-top: 56.25%;
     display: inline-block;
     margin: 0px auto;
   }
+}
+
+section article img {
+  width: 90%;
 }
