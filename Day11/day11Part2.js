@@ -1,4 +1,4 @@
-try{var originalSeatsMatrix = require('./input2.js');} catch(error){}
+try{var originalSeatsMatrix = require('./input.js');} catch(error){}
 
 function day11_occupiedVissibleCounter(fila, columna, anyMatrix) {
     let occupiedCounter = 0;
@@ -8,24 +8,37 @@ function day11_occupiedVissibleCounter(fila, columna, anyMatrix) {
     //Busco en horizontal hacia la izquierda
     for (let horizontalLeft = columna - 1; horizontalLeft >= 0; horizontalLeft--) {
         const positionState = anyMatrix[fila][horizontalLeft];
+        if (positionState == 'L') {
+            break;
+        }
         if (positionState === '#') {
+            
             occupiedCounter += 1;
             break;
         }
+        
     }
     //Busco en horizontal hacia la derecha
     for (let horizontalRight = columna + 1; horizontalRight < n; horizontalRight++) {
         const positionState = anyMatrix[fila][horizontalRight];
+        if (positionState == 'L') {
+            break;
+        }
         if (positionState === '#') {
+            
             occupiedCounter += 1;
             break;
         }
     }
 
     //Busco en Vertical hacia arriba
-    for (let verticalUp = fila - 1; verticalUp > 0; verticalUp--) {
+    for (let verticalUp = fila - 1; verticalUp >= 0; verticalUp--) {
         const positionState = anyMatrix[verticalUp][columna];
+        if (positionState == 'L') {
+            break;
+        }
         if (positionState === '#') {
+            
             occupiedCounter += 1;
             break;
         }
@@ -33,7 +46,11 @@ function day11_occupiedVissibleCounter(fila, columna, anyMatrix) {
     //Busco en Vertical hacia abajo
     for (let verticalDown = fila + 1; verticalDown < m; verticalDown++) {
         const positionState = anyMatrix[verticalDown][columna];
+        if (positionState == 'L') {
+            break;
+        }
         if (positionState === '#') {
+            
             occupiedCounter += 1;
             break;
         }
@@ -43,7 +60,11 @@ function day11_occupiedVissibleCounter(fila, columna, anyMatrix) {
     let diagonalNO = [fila-1, columna-1];
     while (diagonalNO[0] >= 0 && diagonalNO[1] >= 0) {
         const positionState = anyMatrix[diagonalNO[0]][diagonalNO[1]];
+        if (positionState == 'L') {
+            break;
+        }
         if (positionState === '#') {
+            
             occupiedCounter += 1;
             break;
         }
@@ -54,7 +75,11 @@ function day11_occupiedVissibleCounter(fila, columna, anyMatrix) {
     let diagonalNE = [fila-1, columna+1];
     while (diagonalNE[0] >= 0 && diagonalNE[1] < n) {
         const positionState = anyMatrix[diagonalNE[0]][diagonalNE[1]];
+        if (positionState == 'L') {
+            break;
+        }
         if (positionState === '#') {
+            
             occupiedCounter += 1;
             break;
         }
@@ -65,7 +90,11 @@ function day11_occupiedVissibleCounter(fila, columna, anyMatrix) {
     let diagonalSO = [fila+1, columna-1];
     while (diagonalSO[0] < m && diagonalSO[1] >= 0) {
         const positionState = anyMatrix[diagonalSO[0]][diagonalSO[1]];
+        if (positionState == 'L') {
+            break;
+        }
         if (positionState === '#') {
+            
             occupiedCounter += 1;
             break;
         }
@@ -76,7 +105,11 @@ function day11_occupiedVissibleCounter(fila, columna, anyMatrix) {
     let diagonalSE = [fila+1, columna+1];
     while (diagonalSE[0] < m && diagonalSE[1] < n) {
         const positionState = anyMatrix[diagonalSE[0]][diagonalSE[1]];
+        if (positionState == 'L') {
+            break;
+        }
         if (positionState === '#') {
+            
             occupiedCounter += 1;
             break;
         }
@@ -93,7 +126,7 @@ function day11_refreshPosition(fila, columna, lastSeatsMap) {
         return '.';
     }
     let occupiedVissible = day11_occupiedVissibleCounter(fila, columna, lastSeatsMap);
-
+    
     if (positionState === 'L') {
         if (occupiedVissible == 0) {
             return '#';
@@ -125,19 +158,27 @@ function day11_cloneMatrix(targetMatrix, originalMatrix) {
     } 
 }
 
+function day11_printMatrix(anyMatrix) {
+    for (let index = 0; index < anyMatrix.length; index++) {
+        console.log(anyMatrix[index].join(""));
+    }
+}
+
 // --------------------- MAIN FUNCTION ----------------------
 // Problema fue = [...Array[Array]] -> Los arrays de adentro aún referencian
 function day11_SeatingSystem_Part2(){
     const m = originalSeatsMatrix.length;
     const n = originalSeatsMatrix[0].length;
-
+    
     let lastMatrix = originalSeatsMatrix;
     let nextMatrix = day11_initializeMatrix(m, n, 0);
     let totalOccuppiedSeats = 0;
     let equalityCounter = 0;
     //simulación
     while (equalityCounter < m * n) {
-        console.log(lastMatrix);
+        //console.log(lastMatrix);    
+        //console.log("\nPaso de Simulación\n");
+        //day11_printMatrix(lastMatrix);
         totalOccuppiedSeats = 0;
         equalityCounter = 0;
         // Paso
@@ -154,7 +195,6 @@ function day11_SeatingSystem_Part2(){
             }
         }
         day11_cloneMatrix(lastMatrix, nextMatrix);
-
     }
     return totalOccuppiedSeats;
 }

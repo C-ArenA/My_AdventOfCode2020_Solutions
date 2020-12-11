@@ -1,4 +1,0 @@
-L.LL.
-LLLLL
-L.L.L
-LLLL.
