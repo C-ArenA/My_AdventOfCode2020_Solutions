@@ -1,6 +1,6 @@
 try{var adaptersArray = require('./input.js');} catch(error){}
 
-function countDifferences(counters, thisAdapter, thisSet) {
+function day10_countDifferences(counters, thisAdapter, thisSet) {
     if (thisSet.has(thisAdapter+1)) {
         counters.onesCounter += 1;
     } else if (thisSet.has(thisAdapter+2)) {
@@ -21,7 +21,7 @@ function day10_AdapterArray_Part1(){
     }
     adaptersSet.forEach(
         (thisAdapter, thisAdapterAlso, thisSet) => {
-            countDifferences(counters, thisAdapter, thisSet);
+            day10_countDifferences(counters, thisAdapter, thisSet);
         }
     );
     counters.thressCounter += 1;
