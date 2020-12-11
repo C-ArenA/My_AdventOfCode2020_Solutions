@@ -1,4 +1,9 @@
 try{var originalSeatsMatrix = require('./input.js');} catch(error){}
+try{
+    var Part1 = require('./day11Part1.js');
+    var day11_initializeMatrix = Part1.day11_initializeMatrix;
+    var day11_cloneMatrix = Part1.day11_cloneMatrix;
+} catch(error){}
 
 function day11_occupiedVissibleCounter(fila, columna, anyMatrix) {
     let occupiedCounter = 0;
@@ -120,7 +125,7 @@ function day11_occupiedVissibleCounter(fila, columna, anyMatrix) {
     return occupiedCounter;
 }
 
-function day11_refreshPosition(fila, columna, lastSeatsMap) {
+function day11_refreshPosition_Part2(fila, columna, lastSeatsMap) {
     const positionState = lastSeatsMap[fila][columna];
     if (positionState === '.') {
         return '.';
@@ -141,23 +146,6 @@ function day11_refreshPosition(fila, columna, lastSeatsMap) {
     }
 }
 
-function day11_initializeMatrix(m,n, value) {
-    let newMatrix = [];
-    for (let i = 0; i < m; i++) {
-        newMatrix[i] = []
-        for (let j = 0; j < n; j++) {
-            newMatrix[i][j] = value;
-        }
-    }
-    return newMatrix;
-}
-
-function day11_cloneMatrix(targetMatrix, originalMatrix) {
-    for (let index = 0; index < originalMatrix.length; index++) {
-        targetMatrix[index] = [...originalMatrix[index]];
-    } 
-}
-
 function day11_printMatrix(anyMatrix) {
     for (let index = 0; index < anyMatrix.length; index++) {
         console.log(anyMatrix[index].join(""));
@@ -169,8 +157,8 @@ function day11_printMatrix(anyMatrix) {
 function day11_SeatingSystem_Part2(){
     const m = originalSeatsMatrix.length;
     const n = originalSeatsMatrix[0].length;
-    
-    let lastMatrix = originalSeatsMatrix;
+    let lastMatrix = day11_initializeMatrix(m, n, 0);
+    day11_cloneMatrix(lastMatrix, originalSeatsMatrix);
     let nextMatrix = day11_initializeMatrix(m, n, 0);
     let totalOccuppiedSeats = 0;
     let equalityCounter = 0;
@@ -184,7 +172,7 @@ function day11_SeatingSystem_Part2(){
         // Paso
         for (let i = 0; i < m; i++) {
             for (let j = 0; j < n; j++) {
-                const char = day11_refreshPosition(i, j, lastMatrix);
+                const char = day11_refreshPosition_Part2(i, j, lastMatrix);
                 nextMatrix[i][j] = char;
                 if (nextMatrix[i][j] == lastMatrix [i][j]) {
                     equalityCounter += 1;

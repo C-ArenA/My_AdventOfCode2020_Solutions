@@ -66,9 +66,9 @@ function day11_cloneMatrix(targetMatrix, originalMatrix) {
 function day11_SeatingSystem_Part1(){
     const m = originalSeatsMatrix.length;
     const n = originalSeatsMatrix[0].length;
-
-    let lastMatrix = originalSeatsMatrix;
     let nextMatrix = day11_initializeMatrix(m, n, 0);
+    let lastMatrix = day11_initializeMatrix(m, n, 0);
+    day11_cloneMatrix(lastMatrix, originalSeatsMatrix);
     let totalOccuppiedSeats = 0;
     let equalityCounter = 0;
     //simulación
@@ -95,3 +95,7 @@ function day11_SeatingSystem_Part1(){
 }
 
 console.log(day11_SeatingSystem_Part1());
+
+try{
+    module.exports = {day11_initializeMatrix: day11_initializeMatrix, day11_cloneMatrix: day11_cloneMatrix};
+} catch(e){}
