@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advent Of Code - Day 12 - Visualization with canvas</title>
+    <style>
+        canvas{
+            border-style: dashed;
+            height: fit-content;
+            margin: auto;
+            display: block;
+        }
+        main{ 
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Look at my canvas</h1>
+        <canvas id="shipMapCanvas" width="500" height="500"></canvas>
+        <button onclick="eraseShip(); miBarquito.moveEast(1); drawShip();">Move to East</button>
+        <button onclick="eraseShip(); miBarquito.moveWest(1); drawShip();">Move to West</button>
+        <button onclick="eraseShip(); miBarquito.moveNorth(1); drawShip();">Move to North</button>
+        <button onclick="eraseShip(); miBarquito.moveSouth(1); drawShip();">Move to South</button>
+        <button onclick="day12_drawRunNavigationInstructions(navigationInstructions, miBarquito)">Run Again</button>
+    </main>
+    <script src="input.js"></script>
+    <script src="day12Part1.js"></script>
+    <script>
+        map = document.getElementById("shipMapCanvas");
+        miBarquito = new Ship(0,0,0)
+        ctx = map.getContext("2d");
+        ctx.translate(map.width/2,map.height/2);
+        
+        function eraseShip() {
+            let xPosition = Math.floor(miBarquito.xPosition/5);
+            let yPosition = Math.floor(miBarquito.yPosition/5);
+            ctx.fillStyle = "#FF0000";
+            ctx.fillRect(xPosition, -yPosition, 5, 5)
+        }
+        function drawShip() {
+            let xPosition = Math.floor(miBarquito.xPosition/5);
+            let yPosition = Math.floor(miBarquito.yPosition/5);
+            ctx.fillStyle = "#0000FF";
+            ctx.fillRect(xPosition, -yPosition, 5, 5)
+            ctx.fillStyle = "#FFFFFF";
+            ctx.moveTo(xPosition, -yPosition)
+            ctx.lineTo(xPosition+5, -yPosition-5)
+            //ctx.stroke()
+        }
+        function day12_drawRunNavigationInstructions(navigationList, anyShip){
+            miBarquito.xPosition = 0;
+            miBarquito.yPosition = 0;
+            miBarquito.facing = 0;
+            ctx.fillStyle = "#05F3FA";
+            ctx.fillRect(-map.width/2, -map.height/2, map.width, map.height);
+            ctx.fillStyle = "#FFFF00";
+            ctx.fillRect(miBarquito.xPosition, miBarquito.yPosition, 10, 10)
+            ctx.fillStyle = "#FFFF00";
+            ctx.fillRect(658/5, 824/5, 10, 10)
+            navigationList.forEach(function(command, index){
+                setTimeout(function(){
+                    eraseShip();
+                    anyShip.executeCommand(command);
+                    drawShip();
+                }, index * 10);
+            });
+        }
+        day12_drawRunNavigationInstructions(navigationInstructions, miBarquito);
+        
+
+    </script>
+</body>
+</html>

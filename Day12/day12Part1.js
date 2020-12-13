@@ -105,7 +105,7 @@ function day12_RainRisk_Part1(){
     return miBarquitoLindo.ManhattanDistance;
 }
 
-console.log(day12_RainRisk_Part1());
+//console.log(day12_RainRisk_Part1());
 
 
 try{

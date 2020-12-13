@@ -265,6 +265,11 @@
                 <h3>PART2:</h3>
                 <code id='day12Part2Solution'></code>
             </article>
+            <article>
+                <a href=".\Day12\index.html"><h3>Look at my canvas</h3></a>
+                <canvas id="shipMapCanvas" width="250" height="400" style="display: block; border-style: dashed;"></canvas>
+                <button onclick="day12_drawRunNavigationInstructions(navigationInstructions, miBarquito)">Run Again</button>
+            </article>
         </section>
 
         <!--   **** DAY 13 ****   -->
@@ -659,6 +664,48 @@
 
         day12Part1Solution.innerHTML = day12_RainRisk_Part1();
         day12Part2Solution.innerHTML = day12_RainRisk_Part2();
+
+        map = document.getElementById("shipMapCanvas");
+        miBarquito = new Ship(0,0,0)
+        ctx = map.getContext("2d");
+        ctx.translate(map.width/2,map.height/2);
+        
+        function eraseShip() {
+            let xPosition = Math.floor(miBarquito.xPosition/8);
+            let yPosition = Math.floor(miBarquito.yPosition/8);
+            ctx.fillStyle = "#FF0000";
+            ctx.fillRect(xPosition, -yPosition, 5, 5)
+        }
+        function drawShip() {
+            let xPosition = Math.floor(miBarquito.xPosition/8);
+            let yPosition = Math.floor(miBarquito.yPosition/8);
+            ctx.fillStyle = "#0000FF";
+            ctx.fillRect(xPosition, -yPosition, 5, 5)
+            ctx.fillStyle = "#FFFFFF";
+            ctx.moveTo(xPosition, -yPosition)
+            ctx.lineTo(xPosition+5, -yPosition-5)
+            //ctx.stroke()
+        }
+        function day12_drawRunNavigationInstructions(navigationList, anyShip){
+            miBarquito.xPosition = 0;
+            miBarquito.yPosition = 0;
+            miBarquito.facing = 0;
+            ctx.fillStyle = "#05F3FA";
+            ctx.fillRect(-map.width/2, -map.height/2, map.width, map.height);
+            ctx.fillStyle = "#FFFF00";
+            ctx.fillRect(miBarquito.xPosition, miBarquito.yPosition, 10, 10)
+            ctx.fillStyle = "#FFFF00";
+            ctx.fillRect(658/8, 824/8, 10, 10)
+            navigationList.forEach(function(command, index){
+                setTimeout(function(){
+                    eraseShip();
+                    anyShip.executeCommand(command);
+                    drawShip();
+                }, index * 10);
+            });
+        }
+        day12_drawRunNavigationInstructions(navigationInstructions, miBarquito);
+       
     </script>
 </body>
 </html>
