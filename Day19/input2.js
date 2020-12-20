@@ -24,10 +24,10 @@ var exampleRules4 = {
     0: [1, 3, 2, 1],
     1: ["a"],
     2: ["b"],
-    3: [1, 2, '|', 2, 1]
+    3: [1, '|', 1, 3]
     };
 
 try {
-    module.exports = {rules: exampleRules2};
+    module.exports = {rules: exampleRules4};
 } catch (e) {}
 

@@ -1,5 +1,3 @@
-const { messages } = require('./input.js');
-
 try {
     rules = require('./input.js').rules;
     messages = require('./input.js').messages;
@@ -78,17 +76,14 @@ function rulesArrayToWordSet(rulesObject, ruleNumber) {
     return concatMultipleWordSets(wordSetsArray);
 }
 
-//console.log(ruleArrayToStringsArray(rules, 0));
-//console.log(concatMultipleWordSets([["a", "a"],["a", "b"],["c", "d"]]));
-//console.log(rulesArrayToWordSet(rules, 0));
-
 function main(rulesObject, receivedMessages) {
     let validMessages = rulesArrayToWordSet(rulesObject, 0);
     let messageSize = validMessages[0].length;
+    //Pongo todo en un set para que la búsqueda sea más rápida (Perdón, estoy cansado)
     let validsSet = new Set(validMessages);
     //Eliminar messages que no cumplen tamaño
     let possiblyValids = receivedMessages.filter(word => word.length == messageSize);
+    // Contar válidos
     return possiblyValids.reduce((valids, word) => validsSet.has(word)? valids + 1: valids, 0)
-    //return possiblyValids.length;
 }
 console.log(main(rules, messages));
