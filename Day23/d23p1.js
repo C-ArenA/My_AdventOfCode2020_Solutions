@@ -1,11 +1,11 @@
-let day23_inputRAW = "167248359";
-//let day23_inputRAW = "389125467";
+const { PerformanceObserver, performance } = require('perf_hooks');
+//let day23_inputRAW = "167248359";
+let day23_inputRAW = "389125467";
 
 function showCups(cupsLinkedList, currentCup, startPoint) {
     let cupsString = "";
     let thisCup = cupsLinkedList.keys().next().value;
     if (startPoint) {
-        console.log("Está");   
         thisCup = cupsLinkedList.get(startPoint);
         cupsLinkedList.delete(startPoint);
     }
@@ -36,14 +36,16 @@ function takeNextThreeElements(cupsLinkedList, currentCup) {
         nextElement = [nextKey, nextLink];
     }
     cupsLinkedList.set(currentCup, nextKey);
+    //console.log("pick up: " + showCups(threeElements, 0));
     return {littleList: threeElements, start: firstKey, end: lastKey};
 }
 
-function findDestination(cupsLinkedList, currentCup) {
+function findDestination(cupsLinkedList, currentCup, maxNum) {
     let possibleDestination = currentCup - 1;
     while (!cupsLinkedList.has(possibleDestination)) {
-        possibleDestination = possibleDestination == 0? 9: possibleDestination - 1;
+        possibleDestination = possibleDestination == 0? maxNum: possibleDestination - 1;
     }
+    //console.log("destination: " + possibleDestination + "\n");
     return possibleDestination;
 }
 
@@ -55,16 +57,12 @@ function placePickedUp(cupsLinkedList, pickUp, destination) {
     cupsLinkedList.set(destination, pickUp.start);
 }
 
-function move(cupsLinkedList, currentCup, moveNumber) {
-    console.log("-- move " + moveNumber + " --");
-    console.log("cups: " + showCups(cupsLinkedList, currentCup));
+function move(cupsLinkedList, currentCup) {
+    //console.log("cups: " + showCups(cupsLinkedList, currentCup));
     let pickUp = takeNextThreeElements(cupsLinkedList, currentCup);
-    console.log("pick up: " + showCups(pickUp.littleList, 0));
-    let destination = findDestination(cupsLinkedList, currentCup);
-    console.log("destination: " + destination + "\n");
+    let destination = findDestination(cupsLinkedList, currentCup, 9);
     // Pongo de nuevo los tres elementos
     placePickedUp(cupsLinkedList, pickUp, destination);
-    //console.log("cupsNow: " + showCups(cupsLinkedList, currentCup));
     //Returns the next "current cup"
     return cupsLinkedList.get(currentCup);
 }
@@ -77,10 +75,15 @@ function main(inputRAW) {
     // --------------------------------------
     let nextCup = cups.keys().next().value;
     for (let i = 1; i <= 100; i++) {
-        nextCup = move(cups, nextCup, i);    
+        //console.log("-- move " + i + " --");
+        nextCup = move(cups, nextCup);    
     }
     console.log("-- final --");
     console.log("cups: " + showCups(cups, nextCup));
     console.log("cups: " + showCups(cups, 1, 1).replace(/[ ]/g, ""));
 }
+
+var t0 = performance.now();
 main(day23_inputRAW);
+var t1 = performance.now();
+console.log("It took " + (t1 - t0) + " milliseconds."); 
