@@ -55,13 +55,12 @@ function placePickedUp(cupsLinkedList, pickUp, destination) {
     cupsLinkedList.set(destination, pickUp.start);
 }
 
-function move(cupsLinkedList, currentCup, moveNumber) {
-    console.log("-- move " + moveNumber + " --");
-    console.log("cups: " + showCups(cupsLinkedList, currentCup));
+function move(cupsLinkedList, currentCup) {
+    //console.log("cups: " + showCups(cupsLinkedList, currentCup));
     let pickUp = takeNextThreeElements(cupsLinkedList, currentCup);
-    console.log("pick up: " + showCups(pickUp.littleList, 0));
+    //console.log("pick up: " + showCups(pickUp.littleList, 0));
     let destination = findDestination(cupsLinkedList, currentCup);
-    console.log("destination: " + destination + "\n");
+    //console.log("destination: " + destination + "\n");
     // Pongo de nuevo los tres elementos
     placePickedUp(cupsLinkedList, pickUp, destination);
     //console.log("cupsNow: " + showCups(cupsLinkedList, currentCup));
@@ -73,14 +72,22 @@ function move(cupsLinkedList, currentCup, moveNumber) {
 function main(inputRAW) {
     let cupsArray = inputRAW.split("");
     let cups = new Map(cupsArray.map((cupLabel, index) => [parseInt(cupLabel), parseInt(cupsArray[index+1])]));
-    cups.set(parseInt(cupsArray.pop()), parseInt(cupsArray.shift()));
+    cups.set(parseInt(cupsArray.pop()), 10);
+    for (let next = 10; next < 1000000; next++) {
+        cups.set(next, next+1);
+    }
+    cups.set(1000000,parseInt(cupsArray.shift()));
+    //console.log(cups);
     // --------------------------------------
     let nextCup = cups.keys().next().value;
-    for (let i = 1; i <= 100; i++) {
-        nextCup = move(cups, nextCup, i);    
+    for (let i = 1; i <= 10000000; i++) {
+        if (i%1000 == 0) console.log("-- move " + i + " --") 
+        nextCup = move(cups, nextCup);   
     }
     console.log("-- final --");
-    console.log("cups: " + showCups(cups, nextCup));
-    console.log("cups: " + showCups(cups, 1, 1).replace(/[ ]/g, ""));
+    console.log(cups.get(1));
+    console.log(cups.get(cups.get(1)));
+    //console.log("cups: " + showCups(cups, nextCup));
+    //console.log("cups: " + showCups(cups, 1, 1).replace(/[ ]/g, ""));
 }
 main(day23_inputRAW);
