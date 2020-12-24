@@ -1,0 +1,22 @@
+﻿var day24_flipTileInstructions = [
+'sesenwnenenewseeswwswswwnenewsewsw',
+'neeenesenwnwwswnenewnwwsewnenwseswesw',
+'seswneswswsenwwnwse',
+'nwnwneseeswswnenewneswwnewseswneseene',
+'swweswneswnenwsewnwneneseenw',
+'eesenwseswswnenwswnwnwsewwnwsene',
+'sewnenenenesenwsewnenwwwse',
+'wenwwweseeeweswwwnwwe',
+'wsweesenenewnwwnwsenewsenwwsesesenwne',
+'neeswseenwwswnwswswnw',
+'nenwswwsewswnenenewsenwsenwnesesenew',
+'enewnwewneswsewnwswenweswnenwsenwsw',
+'sweneswneswneneenwnewenewwneswswnese',
+'swwesenesewenwneswnwwneseswwne',
+'enesenwswwswneneswsenwnewswseenwsese',
+'wnwnesenesenenwwnenwsewesewsesesew',
+'nenewswnwewswnenesenwnesewesw',
+'eneswnwswnwsenenwnwnwwseeswneewsenese',
+'neswnwewnwnwseenwseesewsenwsweewe',
+'wseweeenwnesenwwwswnew'];
+try{module.exports = day24_flipTileInstructions;} catch(e){}
