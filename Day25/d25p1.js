@@ -19,7 +19,6 @@ function findLoopSize(cardsPK, doorsPK) {
         if (value == doorsPK) doorsLoopSize = i;
         if (i >= cardsLoopSize && i >= doorsLoopSize) break;
     }    
-    //return {cardsLS: cardsLoopSize, doorsLS: doorsLoopSize}
     return [cardsLoopSize, doorsLoopSize]
 }
 
